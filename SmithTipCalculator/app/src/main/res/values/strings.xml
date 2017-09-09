@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SmithTipCalculator</string>
+    <string name="starRating_Name">Please Enter Your Total and Rating </string>
+    <string name="totalHint_Name">Total</string>
+    <string name="serviceRatingHint_Name">Service Rating (1-10)</string>
+    <string name="submit">Submit</string>
 </resources>
