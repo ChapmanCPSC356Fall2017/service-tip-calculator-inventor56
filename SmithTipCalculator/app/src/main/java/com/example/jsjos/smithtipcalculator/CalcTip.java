@@ -1,5 +1,7 @@
 package com.example.jsjos.smithtipcalculator;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by jsjos on 9/7/2017.
  */
@@ -23,17 +25,32 @@ public class CalcTip {
         else if (starRating == 10) {
             percentage = 0.25;
         }
-        // Calculate and Return Computed Tip
 
-        return Math.round((price * percentage) * 100) / 100;
+        // Calculate and Return Computed Tip
+        return roundNum(price*percentage);
     }
 
-    public static boolean isDefined(String inputStr) {
+    public static double roundNum(double numEnt) {
+        DecimalFormat df = new DecimalFormat("#######.##");
+        return Double.parseDouble(df.format(numEnt));
+    }
+
+    // Type 1 = Double, Type 2 = Int
+    public static boolean isDefined(String inputStr, int type) {
         try {
-            double test = Double.parseDouble(inputStr);
+            if(type == 1)
+            {
+                Double.parseDouble(inputStr);
+                return true;
+            }
+            else if (type == 2)
+            {
+                Integer.parseInt(inputStr);
+                return true;
+            }
 
         }
-        catch (NumberFormatException exc) {
+        catch (NumberFormatException nfe) {
             return false;
         }
         return true;

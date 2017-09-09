@@ -9,12 +9,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 public class MainActivity extends AppCompatActivity {
 
     private TextView enterText;
     private EditText enterTotal;
     private EditText serviceRatingHint;
     private Button submitButton;
+    private TextView resultText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,22 +28,33 @@ public class MainActivity extends AppCompatActivity {
         this.enterTotal = (EditText) findViewById(R.id.totalHint);
         this.serviceRatingHint = (EditText) findViewById(R.id.serviceRatingHint);
         this.submitButton = (Button) findViewById(R.id.submitButton);
+        this.resultText = (TextView) findViewById(R.id.resultText);
 
         this.submitButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                // Check to make sure input is valid
-                if (
-                        CalcTip.isDefined(enterTotal.getText().toString()) &&
-                        CalcTip.isDefined(serviceRatingHint.getText().toString())
-                        )
-                {
+                String priceStr = enterTotal.getText().toString();
+                double beforeTipPrice = Double.parseDouble(priceStr);
+                String ratingStr = serviceRatingHint.getText().toString();
+                int ratingInt = Integer.parseInt(ratingStr);
 
+
+                // Check to make sure input is valid
+
+                if (
+                        CalcTip.isDefined(priceStr, 1) && CalcTip.isDefined(ratingStr, 2))
+                {
+                    // Calculate and set Tip
+                    double result = CalcTip.getTip(beforeTipPrice, ratingInt);
+                    resultText.setText("Tip Total: $" + result +"\nTotal With Tip: $" + CalcTip.roundNum(result + beforeTipPrice));
+                }
+                else
+                {
+                    resultText.setText("Wrong Values. Please Try Again");
                 }
 
-                // Calculate Tip
 
             }
 
