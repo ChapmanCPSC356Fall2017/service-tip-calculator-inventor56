@@ -36,14 +36,4 @@ public class CalcTip {
     }
 
 
-    static boolean isDefinedDouble(String inputStr) {
-        try {
-            double v = Double.parseDouble(inputStr);
-            return true;
-        }
-        catch (Exception erro) {
-            return false;
-        }
-    }
-
 }

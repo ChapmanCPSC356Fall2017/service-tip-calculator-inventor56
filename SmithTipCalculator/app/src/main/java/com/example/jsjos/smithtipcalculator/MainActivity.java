@@ -40,24 +40,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v)
             {
                 String priceStr = enterTotal.getText().toString();
-                double beforeTipPrice = Double.parseDouble(priceStr);
                 int ratingInt = serviceRatingHint.getValue();
 
-
                 // Check to make sure input is valid
-
-                if (
-                        CalcTip.isDefinedDouble(priceStr))
-                {
+                try {
+                    double priceInt = Double.parseDouble(priceStr);
                     // Calculate and set Tip
-                    double result = CalcTip.getTip(beforeTipPrice, ratingInt);
-                    resultText.setText("Tip Total: $" + result +"\nTotal With Tip: $" + CalcTip.roundNum(result + beforeTipPrice));
+                    double result = CalcTip.getTip(priceInt, ratingInt);
+                    resultText.setText("Tip Total: $" + result + "\nTotal With Tip: $" + CalcTip.roundNum(result + priceInt));
                 }
-                else
-                {
+                catch (Exception erro) {
                     resultText.setText("Wrong Values. Please Try Again");
                 }
-
 
             }
 
