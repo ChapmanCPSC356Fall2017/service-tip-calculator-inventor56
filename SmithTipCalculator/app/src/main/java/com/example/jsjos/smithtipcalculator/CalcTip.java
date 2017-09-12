@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 public class CalcTip {
 
-    public static double getTip(double price, int starRating) {
+    static double getTip(double price, int starRating) {
         double percentage = 0;
         if (starRating >= 1 && starRating <= 3) {
             percentage = 0.1;
@@ -30,29 +30,20 @@ public class CalcTip {
         return roundNum(price*percentage);
     }
 
-    public static double roundNum(double numEnt) {
+    static double roundNum(double numEnt) {
         DecimalFormat df = new DecimalFormat("#######.##");
         return Double.parseDouble(df.format(numEnt));
     }
 
-    // Type 1 = Double, Type 2 = Int
-    public static boolean isDefined(String inputStr, int type) {
-        try {
-            if(type == 1)
-            {
-                Double.parseDouble(inputStr);
-                return true;
-            }
-            else if (type == 2)
-            {
-                Integer.parseInt(inputStr);
-                return true;
-            }
 
+    static boolean isDefinedDouble(String inputStr) {
+        try {
+            double v = Double.parseDouble(inputStr);
+            return true;
         }
-        catch (NumberFormatException nfe) {
+        catch (Exception erro) {
             return false;
         }
-        return true;
     }
+
 }

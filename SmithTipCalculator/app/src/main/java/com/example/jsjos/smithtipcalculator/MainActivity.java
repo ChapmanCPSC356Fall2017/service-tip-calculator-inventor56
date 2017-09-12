@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -15,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView enterText;
     private EditText enterTotal;
-    private EditText serviceRatingHint;
+    private NumberPicker serviceRatingHint;
     private Button submitButton;
     private TextView resultText;
 
@@ -26,9 +27,12 @@ public class MainActivity extends AppCompatActivity {
 
         this.enterText = (TextView) findViewById(R.id.starRating);
         this.enterTotal = (EditText) findViewById(R.id.totalHint);
-        this.serviceRatingHint = (EditText) findViewById(R.id.serviceRatingHint);
+        this.serviceRatingHint = (NumberPicker) findViewById(R.id.serviceRatingHint);
         this.submitButton = (Button) findViewById(R.id.submitButton);
         this.resultText = (TextView) findViewById(R.id.resultText);
+
+        serviceRatingHint.setMinValue(1);
+        serviceRatingHint.setMaxValue(10);
 
         this.submitButton.setOnClickListener(new View.OnClickListener()
         {
@@ -37,14 +41,13 @@ public class MainActivity extends AppCompatActivity {
             {
                 String priceStr = enterTotal.getText().toString();
                 double beforeTipPrice = Double.parseDouble(priceStr);
-                String ratingStr = serviceRatingHint.getText().toString();
-                int ratingInt = Integer.parseInt(ratingStr);
+                int ratingInt = serviceRatingHint.getValue();
 
 
                 // Check to make sure input is valid
 
                 if (
-                        CalcTip.isDefined(priceStr, 1) && CalcTip.isDefined(ratingStr, 2))
+                        CalcTip.isDefinedDouble(priceStr))
                 {
                     // Calculate and set Tip
                     double result = CalcTip.getTip(beforeTipPrice, ratingInt);

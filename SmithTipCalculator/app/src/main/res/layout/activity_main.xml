@@ -22,11 +22,10 @@
         android:hint="@string/totalHint_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <EditText
+    <NumberPicker
         android:id="@+id/serviceRatingHint"
         android:gravity="center_horizontal"
         android:layout_margin="20dp"
-        android:hint="@string/serviceRatingHint_Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
